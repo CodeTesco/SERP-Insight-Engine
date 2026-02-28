@@ -6,17 +6,18 @@ from bs4 import BeautifulSoup
 from collections import Counter
 from ddgs import DDGS
 from groq import Groq
+from dotenv import load_dotenv
 import sys
 import PyQt6
+import os
 from PyQt6.QtWidgets import QApplication, QMainWindow, QTableWidget, QTableWidgetItem, QHeaderView
 from PyQt6.QtGui import QShortcut, QKeySequence
 
-
-GROQ_API_KEY = "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"
 SEARCH_QUERY = "gradient boosting for regressions"
 
 # Initialize the Groq client
-client = Groq(api_key=GROQ_API_KEY)
+load_dotenv()
+client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 
 # 1. Generate dynamic features based on the query
 prompt = f"""
@@ -95,6 +96,7 @@ def process_url(url):
         return [[], f"*Scraping failed: {type(e).__name__}*"]
 
 def main():
+    GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
     if GROQ_API_KEY == "":
         return print("Please insert your Groq API Key.")
 
