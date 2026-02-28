@@ -182,7 +182,7 @@ def main():
         plt.figure(figsize=(12, 6))
         bars = plt.barh(labels, values, color='#00b894')
         plt.xlabel('Number of Systems Found')
-        plt.title('Top AI-Extracted Features in Crime Reporting Systems')
+        plt.title(f'Top AI-Extracted Features for {SEARCH_QUERY.title()}')
         plt.gca().invert_yaxis()
         
         for bar in bars:
